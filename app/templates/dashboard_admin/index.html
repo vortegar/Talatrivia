@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard admin</title>
+    <style>
+        .section-dashboard {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #b3d9ff, #e6f7ff);
+
+            .titule-initial{
+                margin-top: 50px;
+                color: #4d4d4d;
+            }
+        
+
+            button {
+                cursor: pointer;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+            }
+
+            .send-button {
+                background-color: #28a745;
+                color: white;
+                border: none;
+                margin: 25px 0px 0px 0px;
+                box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1), -2px 4px 6px rgba(0, 0, 0, 0.1);
+                margin: 80px 20px 15px 20px;
+            }
+      }
+    </style>
+</head>
+<body class="section-dashboard">
+    <h1 class="titule-initial">Aqui podras elegir que hacer</h1>
+    <p>podras crear nuevas trivias y asignarle preguntas o asignarle una trivias a los distintos usuarios</p>
+    <div>
+        <a href="{{ url_for('create_trivia.index') }}">
+            <button class="send-button" type="button"> <strong>Inicia un nueva Trivia</strong></button>
+        </a>
+        <a href="{{ url_for('assign_trivia.index') }}">
+            <button class="send-button" type="button"> <strong>Asignar Trivias</strong></button>
+        </a>
+
+        <form action="{{ url_for('dashboard.logout') }}" method="POST">
+            <button class="send-button" type="submit"><strong>Cerrar sesión</strong></button>
+        </form>
+    </div>
+</body>
+</html>

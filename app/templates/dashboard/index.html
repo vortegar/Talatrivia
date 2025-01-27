@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia</title>
+    <style>
+        .section-init {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #b3d9ff, #e6f7ff);
+
+            .titule-initial{
+                margin-top: 50px;
+                color: #4d4d4d;
+            }
+
+            button {
+                cursor: pointer;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+            }
+
+            .button-init {
+                background-color: #28a745;
+                color: white;
+                border: none;
+                margin: 25px 0px 10px 0px;
+                margin: 25px 0px 40px;
+                box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1), -2px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+      }
+    </style>
+</head>
+<body class="section-init">
+    <h1 class="titule-initial">Empieza a responder la trivia</h1>
+    <h2>Trivias creadas</h2>
+    <ul>
+        {% if trivias %}
+            {% for trivia in trivias %}
+                <li>
+                    <strong>{{ trivia.title }}</strong>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>No hay trivias disponibles por ahora.</li>
+        {% endif %}
+    </ul>
+    <p>Credenciales para entrar como administrador <strong>usuario:admin@gmail.com password: 123456</strong> Se pueden crear otros usuarios con este mismo perfil</p>
+
+    <a href="{{ url_for('login.index') }}">
+        <button class="button-init"><strong>Iniciar Sesión</strong></button>
+    </a>
+</body>
+</html>

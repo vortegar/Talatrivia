@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos de Usuarios, Preguntas y Trivias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        .dropdown {
+            margin-bottom: 20px;
+        }
+
+        .dropdown label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .dropdown select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Datos de Usuarios, Preguntas y Trivias</h1>
+
+        <section>
+            <h2>Seleccionar Datos</h2>
+
+            <form action="{{ url_for('assign_trivia.index') }}" method="POST">
+                <!-- <input type="hidden" name="user_id" id="user-id"> -->
+                
+                <div class="dropdown">
+                    <label for="users-dropdown">Usuarios:</label>
+                    <select id="users-dropdown" name="user_id">
+                        <option value="">Seleccione un usuario</option>
+                        {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.name }} - {{ user.email }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="dropdown">
+                    <label for="trivias-dropdown">Trivias:</label>
+                    <select id="trivias-dropdown" name="trivia_id">
+                        <option value="">Seleccione una trivia</option>
+                        {% for trivia in trivias %}
+                            <option value="{{ trivia.id }}">{{ trivia.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="dropdown">
+                    <label for="questions-checkboxes">Preguntas:</label>
+                    <div id="questions-checkboxes">
+                        {% for question in questions %}
+                            <label>
+                                <input type="checkbox" name="questions" value="{{ question.id }}">
+                                {{ question.question }}
+                            </label><br>
+                        {% endfor %}
+                    </div>
+                </div>        
+                <div>
+                    <button type="submit">Agregar Trivia</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

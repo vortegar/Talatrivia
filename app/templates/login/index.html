@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a TalaTrivia</title>
+    <style>
+        .section-login {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #b3d9ff, #e6f7ff);
+
+            .titule-initial{
+                margin-top: 50px;
+                color: #4d4d4d;
+            }
+
+            .error{
+                color: red; 
+                padding: 10px; 
+                margin-bottom: 10px;
+            }
+
+            form {
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column; 
+                align-items: center;
+                width: 100%;
+                max-width: 300px; 
+            }
+
+            input[type="text"], input[type="password"] {
+                padding: 10px;
+                font-size: 16px;
+                margin-bottom: 15px;
+                width: 100%;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        
+
+            button {
+                cursor: pointer;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+            }
+
+            .send-button {
+                background-color: #28a745;
+                color: white;
+                border: none;
+                margin: 25px 0px 0px 0px;
+                box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1), -2px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .button-init {
+                background: none;
+                color: #007bff;
+                border: none;
+                text-decoration: underline;
+                top: 10px;
+                right: 10px; 
+                font-size: 16px;
+                cursor: pointer;
+                position: relative; 
+                margin-bottom: 10px; 
+            }
+          }
+    </style>
+</head>
+<body class="section-login">
+    <h1 class="titule-initial">¡Hola Bienvenido al TalaTrivia!</h1>
+    <p>Por favor ingresa tu usuario y contraseña, en caso de no tenerlos puedes registrarte</p>
+
+    <form method="POST" action="{{ url_for('login.index') }}">
+        <input type="text" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button class="send-button" type="submit"><strong>Ingresar</strong></button>
+    </form>
+    {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
+    <a href="{{ url_for('register.index') }}">
+        <button class="button-init"> <strong>Registrarse</strong> </button>
+    </a>
+
+    <a href="{{ url_for('dashboard.index') }}">
+        <button class="button-init"> <strong>Volver</strong></button>
+    </a>
+    
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivias y Preguntas</title>
+    <style>
+        .section-trivia {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #b3d9ff, #e6f7ff);
+
+            .question-item {
+                background-color: white;
+                border: 1px solid black;
+                border-radius: 10px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 6px 10px rgba(0, 0, 0, 0.15);
+                padding: 20px;
+                margin: 10px 0;
+                max-width: 900px;
+                text-align: left;
+                width: 80vw;
+            }
+
+            .options {
+                padding-left: 20px;
+            }
+
+            button {
+                cursor: pointer;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+            }
+
+            .send-reply-button {
+                background-color: #28a745;
+                color: white;
+                border: none;
+                margin: 25px 0px 10px 0px;
+                box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1), -2px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .log-out-button {
+                background: none;
+                color: #007bff;
+                border: none;
+                text-decoration: underline;
+                top: 10px;
+                right: 10px; 
+                font-size: 16px;
+                cursor: pointer;
+                position: relative; 
+                margin-bottom: 40px; 
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .options label {
+                margin-left: 5px;
+            }
+
+            .titule-question{
+                color:#003366;
+            }
+
+            .titule-initial{
+                color: #4d4d4d;
+            }
+
+            input[type="radio"] {
+                accent-color: green; 
+            }
+
+            @media (min-width: 900px) {
+
+                .send-reply-button {
+                    margin: 25px 0px 40px;
+                }
+                .log-out-button {
+                    position: absolute; 
+                    margin-bottom: 0px; 
+                }
+            } 
+        }
+</style>
+</head>
+<body class="section-trivia">
+    <h1 class="titule-initial">Lista de Trivias con sus Preguntas</h1>
+
+    <form action="/enviar_respuestas" method="POST">
+        <ul>
+            {% for trivia_id, trivia_data in questions_by_trivia.items() %}
+                <li>
+                    <div class="trivia">
+                        <h2>{{ trivia_data.title }}</h2>
+                        <ul class="questions">
+                            {% for question in trivia_data.questions %}
+                                <li class="question-item">
+                                    <p class="titule-question"><strong>{{ question.question }}</strong></p>
+                                    <ul class="options">
+                                        <li >
+                                            <input type="radio" name="question_{{ question.id }}_option1" value="option1">
+                                            <label>{{ question.option1 }}</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" name="question_{{ question.id }}_option2" value="option2">
+                                            <label>{{ question.option2 }}</label>
+                                        </li>
+                                        {% if question.option3 %}
+                                            <li>
+                                                <input type="radio" name="question_{{ question.id }}_option3" value="option3">
+                                                <label>{{ question.option3 }}</label>
+                                            </li>
+                                        {% endif %}
+                                        {% if question.option4 %}
+                                            <li>
+                                                <input type="radio" name="question_{{ question.id }}_option4" value="option4">
+                                                <label>{{ question.option4 }}</label>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <button class="send-reply-button" type="submit"><strong>Enviar respuestas</strong></button>
+    </form>
+
+    <form action="{{ url_for('dashboard.logout') }}" method="POST">
+        <button class="log-out-button" type="submit"><strong>Cerrar sesión</strong></button>
+    </form>
+</body>
+</html>

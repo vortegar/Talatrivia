@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivias</title>
+    <style>
+        .section-create-trivia {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #b3d9ff, #e6f7ff);
+        }
+
+        .titule-initial {
+            margin: 50px 0px 40px 0px;
+            color: #4d4d4d;
+        }
+
+        .trivia {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1), -2px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: white;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .trivia h2 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+
+        .question {
+            margin: 20px 0;
+            list-style-type: none;
+        }
+
+        .options {
+            margin: 10px 0 15px;
+            padding: 0;
+            text-align: left;
+        }
+
+        .option {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .send-button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            margin: 25px 0px 0px 0px;
+            box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1), -2px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="section-create-trivia">
+    <h1 class="titule-initial">Trivias asignadas</h1>
+
+    {% if questions_by_trivia %}
+        {% for trivia_id, trivia_data in questions_by_trivia.items() %}
+            <div class="trivia">
+                <h2>{{ trivia_data.title }}</h2>
+                <ul>
+                    {% for q in trivia_data.questions %}
+                        <li class="question">
+                            <strong>{{ q.question }}</strong>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="question_{{ loop.index }}" value="{{ q.option1 }}">
+                                    {{ q.option1 }}
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="question_{{ loop.index }}" value="{{ q.option2 }}">
+                                    {{ q.option2 }}
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="question_{{ loop.index }}" value="{{ q.option3 }}">
+                                    {{ q.option3 }}
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="question_{{ loop.index }}" value="{{ q.option4 }}">
+                                    {{ q.option4 }}
+                                </label>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No trivias available.</p>
+    {% endif %}
+    <form action="{{ url_for('dashboard.logout') }}" method="POST">
+        <button class="send-button" type="submit"><strong>Cerrar sesión</strong></button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Trivia</title>
+    <style>
+
+        .section-create-trivia {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #b3d9ff, #e6f7ff);
+
+            .titule-initial{
+                margin: 50px 0px 40px 0px;
+                color: #4d4d4d;
+            }
+
+            input[type="text"] {
+                padding: 10px;
+                font-size: 16px;
+                margin-bottom: 15px;
+                width: 70vw;
+                max-width: 500px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        
+            button {
+                cursor: pointer;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+            }
+
+            .send-button {
+                background-color: #28a745;
+                color: white;
+                border: none;
+                margin: 25px 0px 0px 0px;
+                box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1), -2px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+      }
+</style>
+</head>
+<body class="section-create-trivia">
+    <h1 class="titule-initial">Crear un Titulo para la Trivia</h1>
+    <form action="{{ url_for('create_trivia.index') }}" method="POST">
+        <label for="title">Título de la Trivia:</label>
+        <input type="text" id="title" name="title" required>
+        <br><br>
+        <button class="send-button" type="submit"> <strong>Crear Titulo</strong></button>
+    </form>
+    
+    <br>
+    <a href="{{ url_for('dashboard_admin.index') }}">
+        <button class="send-button" type="button">Volver</button>
+    </a>
+</body>
+</html>
